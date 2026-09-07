@@ -1,6 +1,6 @@
 # DSS Dataset — Hỗ trợ lựa chọn ngành học và trường đại học
 
-Kho dữ liệu cho đề tài **“Hệ thống hỗ trợ ra quyết định lựa chọn ngành học và trường đại học cho học sinh THPT dựa trên điểm thi, điểm chuẩn và nhu cầu thị trường lao động tại Việt Nam.”**
+Kho dữ liệu cho đề tài **“Xây dựng hệ thống hỗ trợ ra quyết định trong lựa chọn ngành học và trường đại học cho học sinh THPT.”**
 
 Mục tiêu của bộ dữ liệu là hỗ trợ phân tích và gợi ý tham khảo dựa trên ba góc nhìn:
 
