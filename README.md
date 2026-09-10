@@ -69,3 +69,17 @@ raw
 - [ ] Bổ sung danh mục ngành và bảng mapping ngành–nghề
 - [ ] Làm sạch, chuẩn hóa schema giữa các năm
 - [ ] Tạo bảng tổng hợp phục vụ phân tích và hệ thống gợi ý
+
+## Chạy giao diện web
+
+Giao diện MVP dùng **HTML, CSS, JavaScript** và **Flask**. Nó hiện đối chiếu điểm người dùng với dữ liệu điểm chuẩn 2024, theo các tổ hợp `A00`, `A01`, `B00`, `C00` và `D01`.
+
+```bash
+python -m venv .venv
+.\.venv\Scripts\python -m pip install -r requirements.txt
+.\.venv\Scripts\python app.py
+```
+
+Sau đó mở `http://127.0.0.1:5000` trên trình duyệt.
+
+Các phần VietJobs và xu hướng nhiều năm đã có vị trí trong giao diện, nhưng chỉ được cá nhân hóa sau khi hoàn tất cleaning và bảng mapping ngành–nghề.

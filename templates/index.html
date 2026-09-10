@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#4255ff" />
+    <title>La bàn Đại học | Hệ thống Hỗ trợ Ra Quyết định Tuyển sinh</title>
+    <!-- Google Fonts: Plus Jakarta Sans (Chính) & Inter (Fallback) - Thống nhất toàn hệ thống -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  </head>
+  <body>
+    <!-- Ứng dụng Hỗ trợ Ra Quyết định Tuyển sinh Đại học (DSS) - Chuẩn phong cách Quizlet / Wayground: Flat, Đơn giản, Bộ Icon Vector Đồng Bộ -->
+    <div class="app-wrapper">
+      <!-- HEADER / NAVIGATION -->
+      <header class="app-header">
+        <div class="header-inner">
+          <a href="#recommend" class="brand" data-nav="recommend" aria-label="Trang chủ La bàn Đại học">
+            <div class="brand-icon" aria-hidden="true">
+              <svg class="ui-icon ui-icon-lg" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" />
+                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+              </svg>
+            </div>
+            <div class="brand-text">
+              <span class="brand-title">LA BÀN ĐẠI HỌC</span>
+              <span class="brand-sub">Tuyển sinh 2024</span>
+            </div>
+          </a>
+
+          <nav class="main-nav" aria-label="Điều hướng chính">
+            <a href="#recommend" class="nav-btn active" data-nav="recommend">
+              <svg class="ui-icon ui-icon-md" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+              <span>Gợi ý lộ trình</span>
+            </a>
+            <a href="#admissions" class="nav-btn" data-nav="admissions">
+              <svg class="ui-icon ui-icon-md" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <span>Tra cứu điểm chuẩn</span>
+            </a>
+            <a href="#career" class="nav-btn" data-nav="career">
+              <svg class="ui-icon ui-icon-md" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              <span>Xu hướng nghề</span>
+            </a>
+            <a href="#about" class="nav-btn" data-nav="about">
+              <svg class="ui-icon ui-icon-md" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+              <span>Về dữ liệu</span>
+            </a>
+          </nav>
+
+          <div class="header-actions">
+            <button type="button" class="wishlist-btn" id="open-wishlist-btn" aria-label="Xem danh sách nguyện vọng">
+              <svg class="ui-icon ui-icon-md" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+              <span>Nguyện vọng</span>
+              <span class="wishlist-badge" id="header-wishlist-count">0</span>
+            </button>
+            <button type="button" class="theme-btn" id="theme-toggle-btn" aria-label="Đổi giao diện sáng tối">
+              <svg id="theme-icon-moon" class="ui-icon ui-icon-md" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+              <svg id="theme-icon-sun" class="ui-icon ui-icon-md hidden" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- MAIN CONTAINER -->
+      <main class="app-main">
+        <!-- ==================== VIEW 1: GỢI Ý NGUYỆN VỌNG ==================== -->
+        <section class="app-view active" id="recommend-view">
+          <div class="view-hero">
+            <div class="hero-badge">
+              <svg class="ui-icon" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              <span>Tuyển sinh Đại học 2024</span>
+            </div>
+            <h1 class="hero-title">Chọn ngành &amp; trường phù hợp với điểm số của bạn</h1>
+            <p class="hero-desc">Nhập điểm thi THPT. Hệ thống đối chiếu trực tiếp với điểm chuẩn 2024 của hơn 20.000 ngành để gợi ý các mức độ: An toàn, Phù hợp và Thử sức.</p>
+          </div>
+
+          <!-- 2-COLUMN DECISION DASHBOARD -->
+          <div class="dashboard-grid">
+            <!-- CỘT TRÁI: BỘ LỌC & NHẬP ĐIỂM -->
+            <div class="card form-card">
+              <div class="card-header">
+                <div class="card-step-badge">Bước 1</div>
+                <h2 class="card-title">Nhập điểm &amp; Nguyện vọng</h2>
+              </div>
+
+              <!-- Quick presets -->
+              <div class="preset-section">
+                <span class="preset-label">Thử nhanh mức điểm mẫu:</span>
+                <div class="preset-chips">
+                  <button type="button" class="preset-btn" data-preset="high">
+                    <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <span>27.0đ (Giỏi)</span>
+                  </button>
+                  <button type="button" class="preset-btn" data-preset="good">
+                    <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                    <span>24.0đ (Khá)</span>
+                  </button>
+                  <button type="button" class="preset-btn" data-preset="avg">
+                    <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                    <span>21.0đ (TB-Khá)</span>
+                  </button>
+                  <button type="button" class="preset-btn preset-reset" data-preset="reset">
+                    <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>
+                    <span>Nhập lại</span>
+                  </button>
+                </div>
+              </div>
+
+              <form id="recommend-form" novalidate>
+                <!-- Chọn tổ hợp -->
+                <div class="form-group">
+                  <label class="form-label" for="combination-select">Tổ hợp xét tuyển</label>
+                  <select class="form-select" id="combination-select" name="combination">
+                    <option value="D01" selected>D01 · Toán, Ngữ văn, Ngoại ngữ</option>
+                    <option value="A00">A00 · Toán, Vật lý, Hóa học</option>
+                    <option value="A01">A01 · Toán, Vật lý, Ngoại ngữ</option>
+                    <option value="D07">D07 · Toán, Hóa học, Ngoại ngữ</option>
+                    <option value="B00">B00 · Toán, Hóa học, Sinh học</option>
+                    <option value="C00">C00 · Ngữ văn, Lịch sử, Địa lý</option>
+                    <option value="A02">A02 · Toán, Vật lý, Sinh học</option>
+                    <option value="B08">B08 · Toán, Sinh học, Ngoại ngữ</option>
+                    <option value="C01">C01 · Ngữ văn, Toán, Vật lý</option>
+                    <option value="C02">C02 · Ngữ văn, Toán, Hóa học</option>
+                  </select>
+                </div>
+
+                <!-- Ô nhập điểm 3 môn -->
+                <div class="form-group">
+                  <label class="form-label">Điểm thi 3 môn (thang 10)</label>
+                  <div class="score-input-grid" id="score-input-grid">
+                    <!-- Sẽ render động theo tổ hợp môn -->
+                  </div>
+                </div>
+
+                <!-- Thống kê tổng điểm trực tiếp -->
+                <div class="score-sum-box">
+                  <span class="sum-label">Tổng điểm dự kiến:</span>
+                  <div class="sum-value-wrap">
+                    <span class="sum-number" id="total-score-display">—</span>
+                    <span class="sum-max">/ 30.00</span>
+                  </div>
+                </div>
+
+                <!-- Lọc theo nhóm ngành -->
+                <div class="form-group">
+                  <label class="form-label" for="group-filter">Nhóm ngành quan tâm <small>(không bắt buộc)</small></label>
+                  <select class="form-select" id="group-filter" name="group">
+                    <option value="">-- Tất cả nhóm ngành --</option>
+                    {% for group in major_groups %}
+                    <option value="{{ group }}">{{ group }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+
+                <!-- Tìm kiếm theo từ khóa -->
+                <div class="form-group">
+                  <label class="form-label" for="interest-input">Trường hoặc ngành cụ thể <small>(không bắt buộc)</small></label>
+                  <input type="text" class="form-input" id="interest-input" placeholder="Ví dụ: Công nghệ thông tin, Bách Khoa..." autocomplete="off" />
+                </div>
+
+                <!-- Nút phân tích -->
+                <button type="submit" class="btn btn-primary btn-block" id="submit-btn">
+                  <svg class="ui-icon ui-icon-md" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                  <span>Phân tích lộ trình trúng tuyển</span>
+                </button>
+                <div class="form-alert hidden" id="form-alert" role="alert"></div>
+              </form>
+            </div>
+
+            <!-- CỘT PHẢI: KẾT QUẢ GỢI Ý THÔNG MINH -->
+            <div class="card results-card">
+              <div class="card-header results-header">
+                <div>
+                  <div class="card-step-badge">Bước 2</div>
+                  <h2 class="card-title">Kết quả phân tích gợi ý</h2>
+                </div>
+                <div class="results-meta hidden" id="results-meta">
+                  <span class="score-pill" id="result-score-badge">Tổng điểm: 0.00</span>
+                </div>
+              </div>
+
+              <!-- Filter tabs cho kết quả -->
+              <div class="filter-tabs-bar hidden" id="filter-tabs-bar">
+                <button type="button" class="tab-pill active" data-bucket="all">Tất cả (<span id="count-all">0</span>)</button>
+                <button type="button" class="tab-pill safe-pill" data-bucket="safe">An toàn (<span id="count-safe">0</span>)</button>
+                <button type="button" class="tab-pill match-pill" data-bucket="match">Phù hợp (<span id="count-match">0</span>)</button>
+                <button type="button" class="tab-pill reach-pill" data-bucket="reach">Thử sức (<span id="count-reach">0</span>)</button>
+              </div>
+
+              <!-- Trạng thái trống ban đầu -->
+              <div class="empty-state-box" id="empty-state">
+                <div class="empty-icon-wrap" aria-hidden="true">
+                  <svg class="ui-icon ui-icon-xl" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="m9 12 2 2 4-4"/>
+                  </svg>
+                </div>
+                <h3 class="empty-title">Chưa có dữ liệu phân tích</h3>
+                <p class="empty-desc">Nhập điểm 3 môn bên trái hoặc bấm vào các nút điểm mẫu (27đ, 24đ, 21đ) để xem ngay các ngành học phù hợp nhất với bạn.</p>
+                <div class="empty-guide-cards">
+                  <div class="guide-mini-card safe">
+                    <strong>An toàn</strong>
+                    <p>Cao hơn điểm chuẩn từ +1.00đ trở lên</p>
+                  </div>
+                  <div class="guide-mini-card match">
+                    <strong>Phù hợp</strong>
+                    <p>Cách điểm chuẩn trong khoảng ±1.00đ</p>
+                  </div>
+                  <div class="guide-mini-card reach">
+                    <strong>Thử sức</strong>
+                    <p>Thấp hơn điểm chuẩn từ 1.00đ đến 3.00đ</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Loading spinner -->
+              <div class="loading-state-box hidden" id="loading-state">
+                <div class="flat-spinner"></div>
+                <p>Đang đối chiếu dữ liệu điểm chuẩn 2024...</p>
+              </div>
+
+              <!-- Danh sách thẻ gợi ý -->
+              <div class="recommendations-container hidden" id="recommendations-container">
+                <div class="recommendations-scroll-area" id="recommendations-list">
+                  <!-- Sẽ render các thẻ gợi ý -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== VIEW 2: TRA CỨU ĐIỂM CHUẨN ==================== -->
+        <section class="app-view" id="admissions-view">
+          <div class="view-hero">
+            <div class="hero-badge">
+              <svg class="ui-icon" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg>
+              <span>Kho Dữ Liệu Tuyển Sinh</span>
+            </div>
+            <h1 class="hero-title">Tra cứu điểm chuẩn đại học 2024</h1>
+            <p class="hero-desc">Tìm kiếm và lọc trực tiếp trên hơn 20.000 bản ghi điểm chuẩn chính thức từ các trường đại học trên cả nước.</p>
+          </div>
+
+          <!-- Khung tìm kiếm & lọc -->
+          <div class="card search-control-card">
+            <div class="search-form-row">
+              <div class="search-input-wrap">
+                <svg class="ui-icon ui-icon-md" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                <input type="search" class="form-input search-input" id="adm-search-input" placeholder="Tìm theo tên trường, tên ngành, mã ngành (ví dụ: Bách Khoa, Kinh tế, CNTT)..." />
+              </div>
+              <div class="search-filters-grid">
+                <select class="form-select" id="adm-combo-filter">
+                  <option value="">Tất cả tổ hợp</option>
+                  <option value="A00">A00 (Toán, Lý, Hóa)</option>
+                  <option value="A01">A01 (Toán, Lý, Anh)</option>
+                  <option value="D01">D01 (Toán, Văn, Anh)</option>
+                  <option value="D07">D07 (Toán, Hóa, Anh)</option>
+                  <option value="B00">B00 (Toán, Hóa, Sinh)</option>
+                  <option value="C00">C00 (Văn, Sử, Địa)</option>
+                  <option value="A02">A02 (Toán, Lý, Sinh)</option>
+                  <option value="B08">B08 (Toán, Sinh, Anh)</option>
+                  <option value="C01">C01 (Văn, Toán, Lý)</option>
+                  <option value="C02">C02 (Văn, Toán, Hóa)</option>
+                </select>
+
+                <select class="form-select" id="adm-group-filter">
+                  <option value="">Tất cả nhóm ngành</option>
+                  {% for group in major_groups %}
+                  <option value="{{ group }}">{{ group }}</option>
+                  {% endfor %}
+                </select>
+
+                <select class="form-select" id="adm-scale-filter">
+                  <option value="30" selected>Thang 30 tiêu chuẩn</option>
+                  <option value="40">Thang 40 (môn x2)</option>
+                  <option value="all">Tất cả thang điểm</option>
+                </select>
+
+                <select class="form-select" id="adm-sort-filter">
+                  <option value="cutoff_desc" selected>Điểm chuẩn: Cao → Thấp</option>
+                  <option value="cutoff_asc">Điểm chuẩn: Thấp → Cao</option>
+                  <option value="school_asc">Tên trường: A → Z</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bảng dữ liệu điểm chuẩn -->
+          <div class="card table-card">
+            <div class="table-meta-bar">
+              <span id="adm-total-text">Đang tải dữ liệu...</span>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table" id="admissions-table">
+                <thead>
+                  <tr>
+                    <th>Mã trường</th>
+                    <th>Trường đào tạo</th>
+                    <th>Ngành xét tuyển</th>
+                    <th>Mã ngành</th>
+                    <th>Tổ hợp</th>
+                    <th>Điểm chuẩn 2024</th>
+                    <th>Ghi chú / Thang</th>
+                    <th class="th-action">Lưu NV</th>
+                  </tr>
+                </thead>
+                <tbody id="admissions-tbody">
+                  <!-- Dữ liệu render qua JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Phân trang -->
+            <div class="pagination-bar" id="adm-pagination">
+              <button type="button" class="btn btn-secondary btn-sm" id="adm-prev-btn" disabled>&larr; Trang trước</button>
+              <span class="page-indicator" id="adm-page-indicator">Trang 1 / 1</span>
+              <button type="button" class="btn btn-secondary btn-sm" id="adm-next-btn">Trang sau &rarr;</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== VIEW 3: XU HƯỚNG NGHỀ NGHIỆP ==================== -->
+        <section class="app-view" id="career-view">
+          <div class="view-hero">
+            <div class="hero-badge">
+              <svg class="ui-icon" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              <span>Thị Trường Lao Động</span>
+            </div>
+            <h1 class="hero-title">Xu hướng nghề nghiệp &amp; Cơ hội việc làm</h1>
+            <p class="hero-desc">Bức tranh toàn cảnh việc làm được tổng hợp từ dữ liệu tuyển dụng VietJobs và khảo sát thị trường lao động Việt Nam 2024–2025.</p>
+          </div>
+
+          <div class="career-grid" id="career-sectors-grid">
+            <!-- Render danh sách ngành nghề -->
+          </div>
+
+          <div class="card career-skills-card">
+            <h2 class="card-title">Top 4 nhóm kỹ năng cốt lõi tạo lợi thế cạnh tranh</h2>
+            <div class="skills-highlight-grid" id="career-skills-grid">
+              <!-- Render kỹ năng -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== VIEW 4: VỀ DỮ LIỆU & THUẬT TOÁN ==================== -->
+        <section class="app-view" id="about-view">
+          <div class="view-hero">
+            <div class="hero-badge">
+              <svg class="ui-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+              <span>Minh Bạch Thông Tin</span>
+            </div>
+            <h1 class="hero-title">Phương pháp luận &amp; Nguồn gốc dữ liệu</h1>
+            <p class="hero-desc">Chúng tôi tin rằng mọi gợi ý giáo dục phải được giải thích rõ ràng và minh bạch đến từng con số.</p>
+          </div>
+
+          <div class="about-grid">
+            <div class="card about-card">
+              <div class="about-icon">
+                <svg class="ui-icon ui-icon-xl" viewBox="0 0 24 24"><line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="1" x2="7" y1="14" y2="14"/><line x1="9" x2="15" y1="8" y2="8"/><line x1="17" x2="23" y1="16" y2="16"/></svg>
+              </div>
+              <h3>Thuật toán phân loại khoảng cách</h3>
+              <p>Mỗi ngành học được xếp vào 3 nhóm dựa trên công thức hiệu số điểm:</p>
+              <div class="formula-box">Chênh lệch (Gap) = Tổng điểm thí sinh − Điểm chuẩn 2024</div>
+              <ul>
+                <li><strong>An toàn (Safe):</strong> Gap &ge; +1.00 điểm (Khả năng trúng tuyển cao).</li>
+                <li><strong>Phù hợp (Match):</strong> −1.00 &le; Gap &lt; +1.00 điểm (Mức độ vừa vặn, điểm dao động sát mốc).</li>
+                <li><strong>Thử sức (Reach):</strong> −3.00 &le; Gap &lt; −1.00 điểm (Cơ hội thách thức, cần cân nhắc xếp ở các thứ tự sau).</li>
+              </ul>
+            </div>
+
+            <div class="card about-card">
+              <div class="about-icon">
+                <svg class="ui-icon ui-icon-xl" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              </div>
+              <h3>Bảo vệ dữ liệu &amp; Quyền riêng tư</h3>
+              <p>Hệ thống tôn trọng và bảo vệ tuyệt đối quyền riêng tư của thí sinh:</p>
+              <ul>
+                <li>Không lưu trữ, không tra cứu theo Số báo danh (SBD) cá nhân.</li>
+                <li>Toàn bộ tính toán diễn ra minh bạch dựa trên tổng điểm 3 môn bạn tự nhập.</li>
+                <li>Danh sách nguyện vọng được lưu cục bộ trên trình duyệt của bạn (Local Storage).</li>
+              </ul>
+            </div>
+
+            <div class="card about-card">
+              <div class="about-icon">
+                <svg class="ui-icon ui-icon-xl" viewBox="0 0 24 24"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></svg>
+              </div>
+              <h3>Nguồn gốc dữ liệu chính thống</h3>
+              <p>Bộ dữ liệu được xây dựng từ các nguồn uy tín:</p>
+              <ul>
+                <li><strong>Điểm chuẩn đại học (2018–2024):</strong> Dữ liệu công bố chính thức từ các trường và tổng hợp từ HTNam1710/ADS_Final.</li>
+                <li><strong>Điểm thi tốt nghiệp THPT (2021–2025):</strong> Phổ điểm tổng hợp toàn quốc của Bộ GD&amp;ĐT.</li>
+                <li><strong>Thị trường tuyển dụng:</strong> Bộ dữ liệu tin tuyển dụng Việt Nam (VietJobs).</li>
+              </ul>
+            </div>
+
+            <div class="card about-card">
+              <div class="about-icon">
+                <svg class="ui-icon ui-icon-xl" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+              </div>
+              <h3>Khuyến cáo quan trọng</h3>
+              <p>Hệ thống là công cụ hỗ trợ ra quyết định mang tính tham khảo:</p>
+              <ul>
+                <li>Điểm chuẩn thực tế năm 2025 có thể biến động do đề thi, chỉ tiêu xét tuyển và số lượng thí sinh đăng ký.</li>
+                <li>Học sinh nên kết hợp sở thích cá nhân, điều kiện tài chính và tư vấn từ gia đình để có lựa chọn tối ưu nhất.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- DRAWER / SHORTLIST NGUYỆN VỌNG -->
+      <div class="drawer-backdrop hidden" id="wishlist-backdrop"></div>
+      <aside class="wishlist-drawer" id="wishlist-drawer" aria-labelledby="drawer-title" aria-hidden="true">
+        <div class="drawer-header">
+          <div>
+            <h2 class="drawer-title" id="drawer-title">Nguyện vọng dự kiến</h2>
+            <p class="drawer-subtitle">Danh sách các ngành bạn đã lưu để so sánh và cân nhắc</p>
+          </div>
+          <button type="button" class="drawer-close-btn" id="close-wishlist-btn" aria-label="Đóng danh sách">
+            <svg class="ui-icon ui-icon-md" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+
+        <div class="drawer-body" id="wishlist-items-container">
+          <!-- Sẽ render danh sách nguyện vọng -->
+        </div>
+
+        <div class="drawer-footer">
+          <button type="button" class="btn btn-primary btn-block" id="copy-wishlist-btn">
+            <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            <span>Sao chép danh sách nguyện vọng</span>
+          </button>
+          <button type="button" class="btn btn-outline btn-block btn-danger-text" id="clear-wishlist-btn">
+            <svg class="ui-icon ui-icon-sm" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+            <span>Xóa toàn bộ</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- TOAST NOTIFICATION -->
+      <div class="toast hidden" id="app-toast" role="status" aria-live="polite"></div>
+    </div>
+
+    <!-- CẤU HÌNH DỮ LIỆU TỪ FLASK -->
+    <script>
+      window.APP_CONFIG = {
+        combinations: {{ combinations | tojson }},
+        subjectNames: {{ subject_names | tojson }}
+      };
+    </script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </body>
+</html>
