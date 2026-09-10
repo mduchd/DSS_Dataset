@@ -81,6 +81,14 @@ Chạy script sau để tạo một bản dữ liệu clean. File gốc trong `d
 
 Kết quả: `data/cleaned/admission/diemchuan_2018_2023_cleaned.csv`.
 
+## Làm sạch tin tuyển dụng VietJobs
+
+```bash
+.\.venv\Scripts\python scripts\clean_vietjobs.py
+```
+
+Kết quả: `data/cleaned/jobs/VietJobs_cleaned.csv`. File raw được giữ nguyên.
+
 ## Chạy giao diện web
 
 Giao diện MVP dùng **HTML, CSS, JavaScript** và **Flask**. Nó hiện đối chiếu điểm người dùng với dữ liệu điểm chuẩn 2024, theo các tổ hợp `A00`, `A01`, `B00`, `C00` và `D01`.
