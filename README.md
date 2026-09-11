@@ -30,7 +30,11 @@ data/
 │   │       └── VietJobs.csv
 │   └── master/                  # Dành cho bảng danh mục tham chiếu
 ├── cleaned/                     # Dữ liệu sau làm sạch và chuẩn hóa
-└── processed/                   # Dữ liệu đã tổng hợp, sẵn sàng phân tích
+│   ├── admission/
+│   ├── exam/
+│   └── jobs/
+├── processed/                   # Dữ liệu đã tổng hợp, sẵn sàng phân tích
+└── scripts/                    # Các script tái lập quy trình làm sạch
 ```
 
 `raw/` luôn được giữ nguyên so với dữ liệu đã tải. Toàn bộ thao tác loại trùng, đổi kiểu dữ liệu, chuẩn hóa tên cột hoặc mapping phải tạo kết quả mới trong `cleaned/` hoặc `processed/`.
@@ -88,6 +92,19 @@ Kết quả: `data/cleaned/admission/diemchuan_2018_2023_cleaned.csv`.
 ```
 
 Kết quả: `data/cleaned/jobs/VietJobs_cleaned.csv`. File raw được giữ nguyên.
+
+## Làm sạch điểm thi 2021–2022
+
+```powershell
+.\.venv\Scripts\python scripts/clean_exam.py
+```
+
+Kết quả:
+
+- `data/cleaned/exam/diemthi_2021_cleaned.csv`
+- `data/cleaned/exam/diemthi_2022_cleaned.csv`
+
+Các file gốc trong `data/raw/exam/` được giữ nguyên.
 
 ## Chạy giao diện web
 

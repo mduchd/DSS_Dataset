@@ -2,13 +2,15 @@
 import pandas as pd
 import numpy as np
 import logging
-import os
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
 
 logging.basicConfig(level=logging.WARNING, format='%(levelname)s: %(message)s')
 
 def clean_diemthi(year):
-    input_path = f'data/raw/exam/diemthi_{year}.csv'
-    output_path = f'data/cleaned/exam/diemthi_{year}_cleaned.csv'
+    input_path = ROOT / "data" / "raw" / "exam" / f"diemthi_{year}.csv"
+    output_path = ROOT / "data" / "cleaned" / "exam" / f"diemthi_{year}_cleaned.csv"
     
     print(f"\n--- THỰC THI 9 TIÊU CHÍ CLEAN: ĐIỂM THI {year} ---")
     
@@ -92,7 +94,7 @@ def clean_diemthi(year):
     print("9. Đã ép kiểu dữ liệu chuẩn xác.")
 
     # XUẤT FILE
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(output_path, index=False, encoding='utf-8-sig')
     print(f"=> XONG! Đã lưu: {output_path}")
 
