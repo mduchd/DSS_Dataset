@@ -77,7 +77,7 @@ raw
 - [x] Tạo bảng tổng hợp điểm thi theo năm, chương trình và mã tỉnh
 - [x] Chuẩn hóa dữ liệu điểm chuẩn 2018–2024 sang cùng một schema
 - [x] Chuẩn hóa VietJobs sang cùng một schema
-- [ ] Bổ sung danh mục ngành và bảng mapping ngành–nghề
+- [x] Tạo danh mục ngành và bảng mapping ngành–nghề
 - [ ] Tạo bảng tổng hợp phục vụ hệ thống gợi ý
 
 ## Làm sạch điểm chuẩn 2018–2023
@@ -166,6 +166,26 @@ Kết quả nằm trong `data/processed/jobs/`:
 - `standardization_report.json`: số dòng và các bản ghi cần rà soát.
 
 Contract cột nằm tại `data/master/jobs_schema.csv`.
+
+## Mapping ngành học với nhóm nghề
+
+Script tạo catalog ngành từ dữ liệu điểm chuẩn và mapping một ngành sang nhóm
+nghề VietJobs bằng quy tắc từ khóa có thể kiểm tra. Mỗi liên kết ghi rõ cơ sở
+mapping và mức tin cậy; mapping chỉ thể hiện liên quan chủ đề, không phải cam
+kết việc làm.
+
+```powershell
+.\.venv\Scripts\python scripts\build_major_job_mapping.py
+```
+
+Kết quả trong `data/master/`:
+
+- `major_catalog.csv`: 4.125 tổ hợp mã/tên/nhóm ngành có trong dữ liệu điểm chuẩn.
+- `major_job_mapping.csv`: 3.992 liên kết ngành–nhóm nghề (coverage 96,78%).
+- `unmapped_majors.csv`: 133 ngành cần quyết định thủ công thay vì tự suy đoán.
+- `major_job_mapping_report.json`: coverage, mức tin cậy và quy tắc áp dụng.
+
+Contract của bảng mapping nằm tại `data/master/major_job_mapping_schema.csv`.
 
 ## Chạy giao diện web
 
