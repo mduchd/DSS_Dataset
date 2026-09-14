@@ -76,8 +76,8 @@ raw
 - [x] Chuẩn hóa dữ liệu điểm thi 2021–2025 sang cùng một schema
 - [x] Tạo bảng tổng hợp điểm thi theo năm, chương trình và mã tỉnh
 - [x] Chuẩn hóa dữ liệu điểm chuẩn 2018–2024 sang cùng một schema
+- [x] Chuẩn hóa VietJobs sang cùng một schema
 - [ ] Bổ sung danh mục ngành và bảng mapping ngành–nghề
-- [ ] Chuẩn hóa VietJobs theo data contract
 - [ ] Tạo bảng tổng hợp phục vụ hệ thống gợi ý
 
 ## Làm sạch điểm chuẩn 2018–2023
@@ -147,6 +147,25 @@ Kết quả nằm trong `data/processed/admission/`:
 - `standardization_report.json`: nguồn đầu vào, số dòng và schema đầu ra.
 
 Contract cột nằm tại `data/master/admission_schema.csv`.
+
+## Chuẩn hóa VietJobs
+
+Script chuẩn hóa các tin tuyển dụng thành bản ghi có `job_id` ổn định, lương
+triệu VND/tháng và kinh nghiệm theo tháng. Các trường kỹ năng, bằng cấp, ngôn
+ngữ và phúc lợi được lưu dưới dạng JSON list. Script không tự suy đoán ngành
+học phù hợp với nghề; quan hệ đó được tạo ở bước mapping sau.
+
+```powershell
+.\.venv\Scripts\python scripts\standardize_vietjobs.py
+```
+
+Kết quả nằm trong `data/processed/jobs/`:
+
+- `vietjobs_postings.csv`: 47.698 tin tuyển dụng canonical.
+- `job_market_summary_by_category.csv`: tổng hợp số tin, lương và kinh nghiệm theo nhóm nghề.
+- `standardization_report.json`: số dòng và các bản ghi cần rà soát.
+
+Contract cột nằm tại `data/master/jobs_schema.csv`.
 
 ## Chạy giao diện web
 
