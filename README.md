@@ -75,8 +75,9 @@ raw
 - [x] Làm sạch dữ liệu điểm chuẩn, điểm thi và VietJobs
 - [x] Chuẩn hóa dữ liệu điểm thi 2021–2025 sang cùng một schema
 - [x] Tạo bảng tổng hợp điểm thi theo năm, chương trình và mã tỉnh
+- [x] Chuẩn hóa dữ liệu điểm chuẩn 2018–2024 sang cùng một schema
 - [ ] Bổ sung danh mục ngành và bảng mapping ngành–nghề
-- [ ] Chuẩn hóa điểm chuẩn giữa các năm và VietJobs theo data contract
+- [ ] Chuẩn hóa VietJobs theo data contract
 - [ ] Tạo bảng tổng hợp phục vụ hệ thống gợi ý
 
 ## Làm sạch điểm chuẩn 2018–2023
@@ -128,6 +129,24 @@ Kết quả nằm trong `data/processed/exam/`:
 - `standardization_report.json`: số dòng đã xử lý và schema đầu ra.
 
 Không hiển thị `candidate_id` hoặc `candidate_number` trong giao diện hay API công khai.
+
+## Chuẩn hóa điểm chuẩn 2018–2024
+
+Script hợp nhất hai nguồn điểm chuẩn đã clean thành một schema chung. Chỉ các
+dòng `THPTQG` dùng thang 30 hoặc 40 có `cutoff_score_30`; các phương thức học
+bạ, DGNL và DGTD giữ nguyên thang điểm nguồn để tránh so sánh sai.
+
+```powershell
+.\.venv\Scripts\python scripts\standardize_admission.py
+```
+
+Kết quả nằm trong `data/processed/admission/`:
+
+- `admission_cutoffs_2018_2024.csv`: 126.185 bản ghi điểm chuẩn canonical.
+- `admission_cutoff_summary_by_year_major.csv`: thống kê xu hướng thang 30 theo năm, ngành và tổ hợp.
+- `standardization_report.json`: nguồn đầu vào, số dòng và schema đầu ra.
+
+Contract cột nằm tại `data/master/admission_schema.csv`.
 
 ## Chạy giao diện web
 

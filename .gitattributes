@@ -1,3 +1,4 @@
 data/cleaned/jobs/VietJobs_cleaned.csv filter=lfs diff=lfs merge=lfs -text
 data/cleaned/exam/*.csv filter=lfs diff=lfs merge=lfs -text
 data/processed/exam/*.csv filter=lfs diff=lfs merge=lfs -text
+data/processed/admission/*.csv filter=lfs diff=lfs merge=lfs -text
