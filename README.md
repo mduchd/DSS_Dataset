@@ -28,12 +28,14 @@ data/
 │   ├── jobs/
 │   │   └── VietJobs/
 │   │       └── VietJobs.csv
-│   └── master/                  # Dành cho bảng danh mục tham chiếu
+│   └── master/                  # Dữ liệu danh mục gốc (nếu có)
 ├── cleaned/                     # Dữ liệu sau làm sạch và chuẩn hóa
 │   ├── admission/
 │   ├── exam/
 │   └── jobs/
-├── processed/                   # Dữ liệu đã tổng hợp, sẵn sàng phân tích
+├── master/                       # Data contract và danh mục chuẩn dùng chung
+├── processed/                   # Dữ liệu chuẩn hóa/tổng hợp, sẵn sàng phân tích
+│   └── exam/                    # Điểm thi đã chuẩn hóa theo năm/chương trình
 └── scripts/                    # Các script tái lập quy trình làm sạch
 ```
 
@@ -70,9 +72,12 @@ raw
 ## Trạng thái
 
 - [x] Tải dữ liệu gốc về `data/raw/`
+- [x] Làm sạch dữ liệu điểm chuẩn, điểm thi và VietJobs
+- [x] Chuẩn hóa dữ liệu điểm thi 2021–2025 sang cùng một schema
+- [x] Tạo bảng tổng hợp điểm thi theo năm, chương trình và mã tỉnh
 - [ ] Bổ sung danh mục ngành và bảng mapping ngành–nghề
-- [ ] Làm sạch, chuẩn hóa schema giữa các năm
-- [ ] Tạo bảng tổng hợp phục vụ phân tích và hệ thống gợi ý
+- [ ] Chuẩn hóa điểm chuẩn giữa các năm và VietJobs theo data contract
+- [ ] Tạo bảng tổng hợp phục vụ hệ thống gợi ý
 
 ## Làm sạch điểm chuẩn 2018–2023
 
@@ -105,6 +110,24 @@ Kết quả:
 - `data/cleaned/exam/diemthi_2022_cleaned.csv`
 
 Các file gốc trong `data/raw/exam/` được giữ nguyên.
+
+## Chuẩn hóa điểm thi 2021–2025
+
+Script chuẩn hóa các file trong `data/cleaned/exam/` sang một schema chung,
+đồng thời tính lại các tổ hợp A00, A01, A02, B00, C00, C01, C02, D01 và D07.
+Contract cột nằm tại `data/master/exam_schema.csv`.
+
+```powershell
+.\.venv\Scripts\python scripts\standardize_exam.py
+```
+
+Kết quả nằm trong `data/processed/exam/`:
+
+- `scores_*.csv`: dữ liệu bản ghi đã chuẩn hóa, chỉ dùng cho phân tích nội bộ.
+- `exam_score_summary_by_year_province.csv`: bảng tổng hợp an toàn hơn cho ứng dụng; không có số báo danh.
+- `standardization_report.json`: số dòng đã xử lý và schema đầu ra.
+
+Không hiển thị `candidate_id` hoặc `candidate_number` trong giao diện hay API công khai.
 
 ## Chạy giao diện web
 
